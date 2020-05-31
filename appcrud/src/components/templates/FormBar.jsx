@@ -30,6 +30,7 @@ class FormBar extends Component {
         const urlencoded = new URLSearchParams();
         urlencoded.append("username", this.state.username);
         urlencoded.append("password", this.state.password);
+        urlencoded.append("id", this.state.id);
 
         const requestOptions = {
             method: 'POST',
