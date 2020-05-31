@@ -9,11 +9,15 @@ class Home extends Component {
 		this.state = {
 			idSelected:  '?',
 			usernameSelected:'',
-			data: {},
+			data:'',
 		};
+		this.setData = this.setData.bind(this);
 		this.getData = this.getData.bind(this);
 		this.selectId = this.selectId.bind(this);
 		this.clearSelectionItem = this.clearSelectionItem.bind(this);
+	}
+	setData(data){
+		this.setState({data});
 	}
 	getData(value) {
 		const urlencoded = new URLSearchParams();
@@ -28,9 +32,12 @@ class Home extends Component {
 
         fetch("http://localhost:3333/home", requestOptions)
             .then(response => response.json())
-			.then(result => this.setState({data:result}));
+			.then(result => {
+				this.setData(result);
+				return console.log('reuslt:',result);
+			});
 			
-		  console.log('data:\n',this.state.data);
+		  console.log('data:\n',this.state.data[0]);
 	}
 	selectId(idSelected,usernameSelected){
 		this.setState({idSelected,usernameSelected});

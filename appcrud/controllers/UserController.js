@@ -16,13 +16,16 @@ module.exports = {
         if(id === '?'){
             users = await User.findAll(
                 {
-                    where:{username:{[Op.like]:`%${username}%`}}
+                    attributes:['id','username','password'],
+                    where:{username:{[Op.like]:`${username}%`}}
                 })
         }else{
             users = await User.findByPk(id);
         }
+        console.log('Data:\n',users);
         return res.json(users);
     },
+
     async createAmdUpdate(req, res) {
         const { id, username, password } = req.body;
         if (id === '?') {
